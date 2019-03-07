@@ -17,8 +17,10 @@ def main():
     rm = visa.ResourceManager(args.driver)
     resources = rm.list_resources()
 
+    # List resources
     if args.list:
-        print(resources)
+        for i, resource in enumerate(resources):
+            print("{}: {}".format(i, resource))
         return 0
 
     # Create some devices
@@ -27,6 +29,7 @@ def main():
         Device("GPIB1::16::INSTR"),
     ]
 
+    # Perform some commands with instruments
     for device in devices:
         logging.info("********")
         if device.resource not in resources:
